@@ -1,0 +1,4 @@
+# Phase 1 winner, frozen at the end of Phase 1 (PLAN 1.10 exit criterion).
+# PLACEHOLDER: replace the inherit target / overrides with the winning settings.
+inherit: configs/exp/p1_e1_frozen_smoothce.yaml
+exp_name: p1_best

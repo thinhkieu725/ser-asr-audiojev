@@ -1,0 +1,4 @@
+# Phase 2 winner, frozen at the end of Phase 2 (PLAN 2.5 exit criterion).
+# PLACEHOLDER: point inherit at the winning E2.x config (or E2.0 if no lambda > 0 wins).
+inherit: configs/exp/p2_e2_lambda0.3.yaml
+exp_name: p2_best

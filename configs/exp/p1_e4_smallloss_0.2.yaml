@@ -1,0 +1,5 @@
+exp_name: p1_e4_smallloss_0.2
+ser: {prompt_lang: en}
+loss:
+  type: smoothed_ce
+  small_loss: {drop_frac: 0.2, warmup_epochs: 1}

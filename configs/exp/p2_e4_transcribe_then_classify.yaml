@@ -1,0 +1,6 @@
+exp_name: p2_e4_transcribe_then_classify
+# E2.4 (optional): SER prompt also gets a transcript (reference with p = 0.5 in training,
+# own greedy ASR hypothesis otherwise and always at eval). Set lambda/schedule to the E2.1-E2.3 winner.
+inherit: configs/exp/p1_best.yaml
+optim: {micro_batch: 4, grad_accum: 12}
+asr: {weight: 0.3, transcript_in_ser: true, transcript_ref_prob: 0.5}

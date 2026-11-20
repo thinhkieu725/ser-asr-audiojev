@@ -1,0 +1,3 @@
+exp_name: p1_e5_unfreeze4
+# E1.5: top-4 audio encoder blocks unfrozen. Copy the best loss/prompt settings here.
+audio_encoder: {unfreeze_top_k: 4, lr: 1.0e-5}

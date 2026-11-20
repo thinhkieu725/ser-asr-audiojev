@@ -1,0 +1,4 @@
+exp_name: p1_e3_frozen_ce
+# E1.3: noise-handling ablation. Set prompt_lang to the winner of E1.1/E1.2.
+ser: {prompt_lang: en}
+loss: {type: ce}

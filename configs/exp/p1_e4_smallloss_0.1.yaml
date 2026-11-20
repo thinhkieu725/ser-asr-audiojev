@@ -1,0 +1,6 @@
+exp_name: p1_e4_smallloss_0.1
+# E1.4: small-loss filtering. Set prompt_lang / loss.type to the best so far.
+ser: {prompt_lang: en}
+loss:
+  type: smoothed_ce
+  small_loss: {drop_frac: 0.1, warmup_epochs: 1}

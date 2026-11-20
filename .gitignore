@@ -1,0 +1,7 @@
+runs/
+data/cache/
+data/Crema/
+data/*.zip
+__pycache__/
+*.egg-info/
+.pytest_cache/

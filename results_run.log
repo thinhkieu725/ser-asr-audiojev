@@ -1,0 +1,61 @@
+7442 files, 0 done, 7442 to go
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]Fetching 17 files: 100%|██████████| 17/17 [00:00<00:00, 4230.64it/s]
+Unrecognized keys in `rope_scaling` for 'rope_type'='default': {'mrope_section'}
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:03<00:14,  3.54s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:06<00:09,  3.25s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:09<00:06,  3.06s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:12<00:02,  2.96s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:14<00:00,  2.70s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:14<00:00,  2.89s/it]
+200/7442
+400/7442
+600/7442
+800/7442
+1000/7442
+1200/7442
+1400/7442
+1600/7442
+1800/7442
+2000/7442
+2200/7442
+2400/7442
+2600/7442
+2800/7442
+3000/7442
+3200/7442
+3400/7442
+3600/7442
+3800/7442
+4000/7442
+4200/7442
+4400/7442
+4600/7442
+4800/7442
+5000/7442
+5200/7442
+5400/7442
+5600/7442
+5800/7442
+6000/7442
+6200/7442
+6400/7442
+6600/7442
+6800/7442
+7000/7442
+7200/7442
+7400/7442
+
+== 7-way prompt as written (surprise counted wrong) ==  n=7442  UA=0.2662  WA=0.2502
+true\pred    angry  disgust     fear    happy  neutral      sad surprise   recall
+angry          376        1      130        1      557        1      205   0.296
+disgust         51       47      230        1      764        4      174   0.037
+fear            38        5      424        1      589        2      212   0.334
+happy           32       19      179       12      787        1      241   0.009
+neutral          0        0       31        0      994        0       62   0.914
+sad              1       20      176        1      956        9      108   0.007
+
+== restricted to 6 CREMA classes (argmax over 6 probs) ==  n=7442  UA=0.2994  WA=0.2830
+true\pred    angry  disgust     fear    happy  neutral      sad   recall
+angry          432        1      188        2      647        1   0.340
+disgust         65       49      291        1      861        4   0.039
+fear            51        6      536        1      675        2   0.422
+happy           50       28      260       33      899        1   0.026
+neutral          0        0       40        0     1047        0   0.963
+sad              2       20      224        2     1014        9   0.007
+
+failed files: 0

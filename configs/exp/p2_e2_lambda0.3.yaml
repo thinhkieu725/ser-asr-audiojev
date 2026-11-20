@@ -1,0 +1,5 @@
+exp_name: p2_e2_lambda0.3
+# E2.2: constant lambda = 0.3.
+inherit: configs/exp/p1_best.yaml
+optim: {micro_batch: 4, grad_accum: 12}
+asr: {weight: 0.3}

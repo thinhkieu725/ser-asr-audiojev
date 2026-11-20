@@ -1,0 +1,5 @@
+exp_name: p2_e1_lambda0.1
+# E2.1: constant lambda = 0.1. Two passes per micro-batch: micro_batch halved, grad_accum doubled.
+inherit: configs/exp/p1_best.yaml
+optim: {micro_batch: 4, grad_accum: 12}
+asr: {weight: 0.1}

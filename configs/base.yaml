@@ -1,0 +1,91 @@
+# Shared defaults. Experiment configs in configs/exp/ override these keys
+# (deep merge); `--set a.b=value` on the command line overrides both.
+exp_name: base
+labels: configs/labels.yaml
+
+model:
+  name: shlv/AudioJev                    # Hub id or local directory
+  revision: d23dddb9669021bb2ef8cae5c07fe24b3e35702d   # pinned snapshot; verify on the server
+  dtype: bfloat16
+  attn_impl: flash_attention_2           # falls back to sdpa if flash_attn is missing
+  drop_modules: [visual]                 # talker/token2wav are never loaded (enable_audio_output=False)
+
+data:
+  # PLACEHOLDERS: point these at the server copies of the manifests.
+  train_manifest: data/manifests/train_pseudo.jsonl
+  dev_manifest: data/manifests/dev_gold.jsonl
+  test_manifest: data/manifests/test_gold.jsonl
+  durations_cache: data/cache/durations.json
+  sample_rate: 16000
+  max_seconds: 30
+  bucket_by_length: true
+  num_workers: 4
+
+ser:
+  prompt_lang: en                        # en | vi
+  question: null                         # null = labels.yaml questions[prompt_lang]
+  permute_candidates: true
+  tta_permutations: 1                    # Phase 1.9
+
+init:
+  adapter: null                          # Phase 3.5: continue from a saved adapter dir instead of a fresh LoRA
+
+lora:
+  r: 32
+  alpha: 64
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  restrict_to: llm                       # LoRA only on thinker.model.layers.*, never the audio tower
+
+audio_encoder:
+  unfreeze_top_k: 0                      # 0 = frozen
+  lr: 1.0e-5
+
+optim:
+  lr: 1.0e-4
+  weight_decay: 0.0
+  warmup_ratio: 0.03
+  scheduler: cosine
+  micro_batch: 8
+  eval_batch: 16
+  grad_accum: 6                          # effective batch 48
+  epochs: 3
+  grad_checkpointing: true
+  max_grad_norm: 1.0
+
+loss:
+  type: smoothed_ce                      # ce | smoothed_ce | soft_kl (Phase 3 only)
+  smoothing: 0.1
+  class_weighting: inv_sqrt_freq         # none | inv_sqrt_freq | balanced_sampler
+  soft_targets: null                     # Phase 3: data/cache/soft_targets_round{r}.npz
+  small_loss:
+    drop_frac: 0.0                       # 0 = off
+    warmup_epochs: 1
+    buffer_size: 2048                    # per-class history of recent losses used for the threshold
+
+asr:                                     # Phase 2 auxiliary ASR
+  weight: 0.0                            # lambda; 0 = SER only (Phase 1 behaviour, no ASR pass)
+  weight_end: null                       # linear decay of lambda to this value over training; null = constant
+  instruction: "Transcribe the Vietnamese speech."
+  normalize_targets: true                # NFC, lowercase, no punctuation, collapsed spaces (diacritics kept)
+  max_target_tokens: 448
+  grad_log_steps: 300                    # log per-component grad norms for the first N optimizer steps
+  eval: auto                             # auto = when weight > 0 or transcript_in_ser; or true/false
+  eval_every: 3                          # ASR dev eval every N SER evals (and at the end)
+  eval_batch: 8
+  generation:
+    tokens_per_second: 15                # max_new_tokens = ceil(seconds * tps) + min_new_tokens
+    min_new_tokens: 16
+    max_new_tokens: 512
+  transcript_in_ser: false               # E2.4 transcribe-then-classify
+  transcript_ref_prob: 0.5               # training: reference transcript with this probability, own hypothesis otherwise
+  transcript_template: 'Transcript of the speech: "{transcript}"'
+
+eval:
+  every_steps: 500                       # optimizer steps
+  select_metric: dev_ua
+  early_stop_patience: 4
+  keep_last: 3
+  ece_bins: 15
+
+seed: 1

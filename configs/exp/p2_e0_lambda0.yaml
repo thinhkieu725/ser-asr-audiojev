@@ -1,0 +1,5 @@
+exp_name: p2_e0_lambda0
+# E2.0: control, lambda = 0 (= Phase 1 best). The ASR eval is on so the base CER is reported.
+inherit: configs/exp/p1_best.yaml
+optim: {micro_batch: 4, grad_accum: 12}   # same batch shape as the joint runs (effective 48)
+asr: {weight: 0.0, eval: true}

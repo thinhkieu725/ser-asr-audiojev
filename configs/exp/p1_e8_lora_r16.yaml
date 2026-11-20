@@ -1,0 +1,3 @@
+exp_name: p1_e8_lora_r16
+# E1.8: LoRA rank (alpha = 2r). Copy the best settings here.
+lora: {r: 16, alpha: 32}

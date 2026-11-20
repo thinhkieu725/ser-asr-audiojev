@@ -1,0 +1,21 @@
+exp_name: p3_gold_ft
+# PLAN 3.5 (optional): short final stage on EXTRA human-labeled training clips only
+# (never dev/test). Continues from the chosen Phase 3 model with 0.1x the learning rates.
+# PLACEHOLDERS: inherit (the final Phase 3 round config), init.adapter, data.train_manifest.
+inherit: configs/exp/p3_round1.yaml
+init:
+  adapter: runs/p3_round1/1/avg5          # e.g. the averaged adapter, or runs/<exp>/<seed>/best
+data:
+  train_manifest: data/manifests/train_gold_extra.jsonl
+loss:
+  type: smoothed_ce                      # gold clips carry hard labels
+  soft_targets: null
+  small_loss: {drop_frac: 0.0}
+optim:
+  lr: 1.0e-5                             # 0.1x the main LR
+  epochs: 2
+audio_encoder:
+  lr: 1.0e-6
+eval:
+  every_steps: 50
+  early_stop_patience: 4

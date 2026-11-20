@@ -1,0 +1,5 @@
+exp_name: p2_e3_lambda0.3to0.05
+# E2.3: lambda decays linearly 0.3 -> 0.05 (ASR shapes features early, SER fine-tunes late).
+inherit: configs/exp/p1_best.yaml
+optim: {micro_batch: 4, grad_accum: 12}
+asr: {weight: 0.3, weight_end: 0.05}

@@ -1,0 +1,2 @@
+exp_name: p1_e8_lora_r64
+lora: {r: 64, alpha: 128}

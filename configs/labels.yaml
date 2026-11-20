@@ -1,0 +1,31 @@
+# Canonical class order. NEVER reorder: every logits/probability array in this
+# project uses this order. The class names must equal the `label` strings used in
+# data/manifests/*.jsonl (TODO: check them against the audited label set).
+classes: [neutral, happy, sad, angry, fear, disgust, surprise]
+
+# Candidate descriptions shown to the model (the `Choice` criteria of AudioJev).
+# `ser.prompt_lang` selects the language. Within a language, descriptions must
+# be unique (AudioJev's reference option order sorts them by UTF-8 bytes).
+descriptions:
+  en:
+    neutral:  "The speaker sounds calm and emotionally neutral"
+    happy:    "The speaker sounds happy or joyful"
+    sad:      "The speaker sounds sad"
+    angry:    "The speaker sounds angry"
+    fear:     "The speaker sounds fearful or anxious"
+    disgust:  "The speaker sounds disgusted"
+    surprise: "The speaker sounds surprised"
+  vi:
+    neutral:  "Người nói có giọng bình thản, trung tính về cảm xúc"
+    happy:    "Người nói có giọng vui vẻ, hạnh phúc"
+    sad:      "Người nói có giọng buồn bã"
+    angry:    "Người nói có giọng tức giận"
+    fear:     "Người nói có giọng sợ hãi hoặc lo lắng"
+    disgust:  "Người nói có giọng ghê tởm, chán ghét"
+    surprise: "Người nói có giọng ngạc nhiên"
+
+# The question (Choice instructions) per language. `ser.question` in the run
+# config overrides this when set.
+questions:
+  en: "Judging by the tone of voice, which emotion does the speaker express?"
+  vi: "Dựa vào giọng nói, người nói đang thể hiện cảm xúc nào?"

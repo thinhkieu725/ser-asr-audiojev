@@ -1,0 +1,3 @@
+exp_name: p1_e1_frozen_smoothce
+# E1.1: frozen audio encoder, smoothed CE, English prompt (default).
+ser: {prompt_lang: en}

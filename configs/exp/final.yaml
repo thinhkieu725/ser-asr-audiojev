@@ -1,0 +1,5 @@
+# Final configuration (PLAN 3 exit criterion). Frozen: NO changes after this point.
+# PLACEHOLDER: point inherit at the chosen Phase 3 config and record the choices below.
+#   self-training round: ?   checkpoint averaging: last ? (avg dir)   gold fine-tuning: yes/no
+inherit: configs/exp/p3_round1.yaml
+exp_name: final
